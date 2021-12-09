@@ -30,7 +30,7 @@ namespace TotallyNotGuFundMe
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, DonationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }

@@ -24,7 +24,7 @@ namespace TotallyNotGuFundMe.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var userId = signinManager.GetVerifiedUserId<ApplicationUser, string>();
+            var userId = signinManager.GetVerifiedUserId<DonationUser, string>();
             if (userId == null)
             {
                 Response.Redirect("/Account/Error", true);
@@ -39,7 +39,7 @@ namespace TotallyNotGuFundMe.Account
             bool rememberMe = false;
             bool.TryParse(Request.QueryString["RememberMe"], out rememberMe);
             
-            var result = signinManager.TwoFactorSignIn<ApplicationUser, string>(SelectedProvider.Value, Code.Text, isPersistent: rememberMe, rememberBrowser: RememberBrowser.Checked);
+            var result = signinManager.TwoFactorSignIn<DonationUser, string>(SelectedProvider.Value, Code.Text, isPersistent: rememberMe, rememberBrowser: RememberBrowser.Checked);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -63,7 +63,7 @@ namespace TotallyNotGuFundMe.Account
                 Response.Redirect("/Account/Error");
             }
 
-            var user = manager.FindById(signinManager.GetVerifiedUserId<ApplicationUser, string>());
+            var user = manager.FindById(signinManager.GetVerifiedUserId<DonationUser, string>());
             if (user != null)
             {
                 var code = manager.GenerateTwoFactorToken(user.Id, Providers.SelectedValue);
