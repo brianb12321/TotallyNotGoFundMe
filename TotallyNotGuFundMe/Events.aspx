@@ -8,7 +8,18 @@
                   ID="eventGrid"
                   ItemType="TotallyNotGuFundMe.Models.Event"
                   DataKeyNames="EventID"
+                  AutoGenerateColumns="False"
+                  CssClass="table"
                   >
+        <Columns>
+            <asp:HyperLinkField DataTextField="Name" DataNavigateUrlFields="EventId" HeaderText="Name" 
+                            InsertVisible="False" SortExpression="EventId"
+                            DataNavigateUrlFormatString="viewEvent.aspx?eventId={0}"/>
 
+            <asp:BoundField DataField="Description" HeaderText="Description" 
+                            SortExpression="Description" />
+            <asp:BoundField DataField="EventState" HeaderText="State" 
+                            SortExpression="EventState" />
+        </Columns>
     </asp:GridView>
 </asp:Content>

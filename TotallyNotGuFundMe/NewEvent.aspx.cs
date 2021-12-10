@@ -26,6 +26,7 @@ namespace TotallyNotGuFundMe
                 {
                     Name = nameTextBox.Text,
                     Description = descriptionTextBox.Text,
+                    ImageUrl = imageUrlTextBox.Text,
                     EventState = EventState.Created
                 };
                 context.Events.Add(newEvent);

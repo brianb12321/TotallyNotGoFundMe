@@ -23,6 +23,7 @@ namespace TotallyNotGuFundMe
                 ApplicationDbContext context = new ApplicationDbContext();
                 Event foundEvent = context.Events.Find(int.Parse(eventId));
                 eventNameLabel.Text = foundEvent.Name;
+                eventImage.ImageUrl = foundEvent.ImageUrl;
             }
         }
     }

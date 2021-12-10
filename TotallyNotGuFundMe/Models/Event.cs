@@ -22,6 +22,8 @@ namespace TotallyNotGuFundMe.Models
         public string Description { get; set; }
         [Required, EnumDataType(typeof(EventState))]
         public EventState EventState { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string ImageUrl { get; set; }
         public virtual ICollection<Pledge> Pledges { get; set; }
     }
 }
