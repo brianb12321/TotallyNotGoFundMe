@@ -1,21 +1,31 @@
 ﻿using System;
+using System.Configuration;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using TotallyNotGuFundMe.Models;
 
 namespace TotallyNotGuFundMe
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            string apiKey = WebConfigurationManager.AppSettings["SENDGRID_API_KEY"];
+            SendGridClient client = new SendGridClient(apiKey);
+            var from = new EmailAddress("brian.jx.b@gmail.com", "Brian Barnes");
+            var to = new EmailAddress(message.Destination);
+            SendGridMessage sgMessage =
+                MailHelper.CreateSingleEmail(from, to, message.Subject, message.Body, message.Body);
+
+            await client.SendEmailAsync(sgMessage);
         }
     }
 

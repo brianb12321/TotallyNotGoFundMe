@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Events</h1>
-    <asp:Button class="btn btn-primary" runat="server" ID="newEventButton" Text="New Event"/>
+    <asp:Button class="btn btn-primary" runat="server" ID="newEventButton" Text="New Event" PostBackUrl="~/NewEvent.aspx"/>
     
     <asp:GridView runat="server"
                   ID="eventGrid"
