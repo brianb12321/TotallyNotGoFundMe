@@ -24,6 +24,8 @@ namespace TotallyNotGuFundMe.Models
         public EventState EventState { get; set; }
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
+        [Required, DataType(DataType.Currency)]
+        public decimal ExpectedAmount { get; set; }
         public virtual ICollection<Pledge> Pledges { get; set; }
     }
 }

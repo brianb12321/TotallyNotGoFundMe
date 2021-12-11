@@ -189,6 +189,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
+    <Content Include="AuthPages\MakePledge.aspx" />
+    <Content Include="AuthPages\MakePledgeSuccessful.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -449,6 +451,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Email\IEmailService.cs" />
     <Compile Include="Events.aspx.cs">
       <DependentUpon>Events.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -458,6 +461,20 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="AuthPages\MakePledge.aspx.cs">
+      <DependentUpon>MakePledge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuthPages\MakePledge.aspx.designer.cs">
+      <DependentUpon>MakePledge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AuthPages\MakePledgeSuccessful.aspx.cs">
+      <DependentUpon>MakePledgeSuccessful.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuthPages\MakePledgeSuccessful.aspx.designer.cs">
+      <DependentUpon>MakePledgeSuccessful.aspx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202112080016038_InitialCreate.cs" />
     <Compile Include="Migrations\202112080016038_InitialCreate.Designer.cs">
@@ -470,6 +487,10 @@
     <Compile Include="Migrations\202112102141543_AddedImageUrl.cs" />
     <Compile Include="Migrations\202112102141543_AddedImageUrl.Designer.cs">
       <DependentUpon>202112102141543_AddedImageUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112112112234_AddedExpectedAmountToEvent.cs" />
+    <Compile Include="Migrations\202112112112234_AddedExpectedAmountToEvent.Designer.cs">
+      <DependentUpon>202112112112234_AddedExpectedAmountToEvent.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DonationUser.cs" />
@@ -548,6 +569,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112102141543_AddedImageUrl.resx">
       <DependentUpon>202112102141543_AddedImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112112112234_AddedExpectedAmountToEvent.resx">
+      <DependentUpon>202112112112234_AddedExpectedAmountToEvent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

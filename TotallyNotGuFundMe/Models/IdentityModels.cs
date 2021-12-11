@@ -13,6 +13,7 @@ namespace TotallyNotGuFundMe.Models
     public class ApplicationDbContext : IdentityDbContext<DonationUser>
     {
         public DbSet<Event> Events { get; set; }
+        public DbSet<Pledge> Pledges { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
