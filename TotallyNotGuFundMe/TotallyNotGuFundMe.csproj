@@ -451,6 +451,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Email\EmailServiceFactory.cs" />
     <Compile Include="Email\IEmailService.cs" />
     <Compile Include="Events.aspx.cs">
       <DependentUpon>Events.aspx</DependentUpon>

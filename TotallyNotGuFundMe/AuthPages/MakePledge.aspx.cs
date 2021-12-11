@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using TotallyNotGuFundMe.Email;
 using TotallyNotGuFundMe.Models;
 
 namespace TotallyNotGuFundMe.AuthPages
@@ -33,13 +38,43 @@ namespace TotallyNotGuFundMe.AuthPages
             try
             {
                 string loggedOnUserId = Context.User.Identity.GetUserId();
-                context.Pledges.Add(new Pledge()
+                Pledge pledge = new Pledge()
                 {
                     EventId = eventId,
                     PledgeAmount = decimal.Parse(pledgeAmountTextBox.Text),
                     UserId = loggedOnUserId
+                };
+                context.Pledges.Add(pledge);
+                Task asyncTask = Task.Run(async () =>
+                {
+                    await context.SaveChangesAsync();
+
+                    IEmailService emailService = EmailServiceFactory.UseSendGridFromConfig();
+                    DonationUser user = await Context.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                        .FindByIdAsync(loggedOnUserId);
+
+                    string emailMessage = $@"
+<p>
+    Dear {user.UserName}:
+</p>
+<p>
+    This is a receipt of your pledge donation you made to the '{eventNameLabel.Text}' event. You will not be charged for this pledge until the event is finished.
+    You will receive another email when pledges are due for payment.
+</p>
+<br/>
+<p>
+    Pledge Amount: {pledge.PledgeAmount}
+</p>
+
+<p>
+    Thank you,<br/>
+    The Totally Not GoFundMe Team
+</p>
+";
+                    await emailService.SendEmailAsync(user.Email, $"Thanks for making a pledge!", emailMessage,
+                        emailMessage);
                 });
-                context.SaveChanges();
+                asyncTask.GetAwaiter().GetResult();
                 Response.Redirect("MakePledgeSuccessful.aspx");
             }
             catch (Exception ex)

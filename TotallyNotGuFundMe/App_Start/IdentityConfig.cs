@@ -10,6 +10,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using TotallyNotGuFundMe.Email;
 using TotallyNotGuFundMe.Models;
 
 namespace TotallyNotGuFundMe
@@ -18,14 +19,8 @@ namespace TotallyNotGuFundMe
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            string apiKey = WebConfigurationManager.AppSettings["SENDGRID_API_KEY"];
-            SendGridClient client = new SendGridClient(apiKey);
-            var from = new EmailAddress("brian.jx.b@gmail.com", "Brian Barnes");
-            var to = new EmailAddress(message.Destination);
-            SendGridMessage sgMessage =
-                MailHelper.CreateSingleEmail(from, to, message.Subject, message.Body, message.Body);
-
-            await client.SendEmailAsync(sgMessage);
+            IEmailService emailService = EmailServiceFactory.UseSendGridFromConfig();
+            await emailService.SendEmailAsync(message.Destination, message.Subject, message.Body, message.Body);
         }
     }
 
