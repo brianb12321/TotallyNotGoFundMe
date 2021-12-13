@@ -444,6 +444,8 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\EventDataService.cs" />
+    <Compile Include="Data\IEventDataService.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -492,6 +494,10 @@
     <Compile Include="Migrations\202112112112234_AddedExpectedAmountToEvent.cs" />
     <Compile Include="Migrations\202112112112234_AddedExpectedAmountToEvent.Designer.cs">
       <DependentUpon>202112112112234_AddedExpectedAmountToEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112130313192_AddEventOwnerIdToEventModel.cs" />
+    <Compile Include="Migrations\202112130313192_AddEventOwnerIdToEventModel.Designer.cs">
+      <DependentUpon>202112130313192_AddEventOwnerIdToEventModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DonationUser.cs" />
@@ -573,6 +579,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112112112234_AddedExpectedAmountToEvent.resx">
       <DependentUpon>202112112112234_AddedExpectedAmountToEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112130313192_AddEventOwnerIdToEventModel.resx">
+      <DependentUpon>202112130313192_AddEventOwnerIdToEventModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
