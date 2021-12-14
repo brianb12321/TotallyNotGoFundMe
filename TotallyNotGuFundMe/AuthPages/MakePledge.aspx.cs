@@ -35,25 +35,28 @@ namespace TotallyNotGuFundMe.AuthPages
 
         protected void makePledgeButton_Click(object sender, EventArgs e)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            try
+            Validate();
+            if (IsValid)
             {
-                string loggedOnUserId = Context.User.Identity.GetUserId();
-                Pledge pledge = new Pledge()
+                ApplicationDbContext context = new ApplicationDbContext();
+                try
                 {
-                    EventId = eventId,
-                    PledgeAmount = decimal.Parse(pledgeAmountTextBox.Text),
-                    UserId = loggedOnUserId
-                };
-                context.Pledges.Add(pledge);
-                Task asyncTask = Task.Run(async () =>
-                {
-                    await context.SaveChangesAsync();
+                    string loggedOnUserId = Context.User.Identity.GetUserId();
+                    Pledge pledge = new Pledge()
+                    {
+                        EventId = eventId,
+                        PledgeAmount = decimal.Parse(pledgeAmountTextBox.Text),
+                        UserId = loggedOnUserId
+                    };
+                    context.Pledges.Add(pledge);
+                    Task asyncTask = Task.Run(async () =>
+                    {
+                        await context.SaveChangesAsync();
 
-                    DonationUser user = await Context.GetOwinContext().GetUserManager<ApplicationUserManager>()
-                        .FindByIdAsync(loggedOnUserId);
+                        DonationUser user = await Context.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                            .FindByIdAsync(loggedOnUserId);
 
-                    string emailMessage = $@"
+                        string emailMessage = $@"
 <p>
     Dear {user.UserName}:
 </p>
@@ -71,20 +74,25 @@ namespace TotallyNotGuFundMe.AuthPages
     The Totally Not GoFundMe Team
 </p>
 ";
-                    await EmailService.SendEmailAsync(user.Email, $"Thanks for making a pledge!", emailMessage,
-                        emailMessage);
-                });
-                asyncTask.GetAwaiter().GetResult();
-                Response.Redirect("MakePledgeSuccessful.aspx");
-            }
-            catch (Exception ex)
-            {
-                alertDiv.Visible = true;
-                errorMessageLabel.Text = ex.InnerException?.Message ?? ex.Message;
-            }
-            finally
-            {
-                context.Dispose();
+                        try
+                        {
+                            await EmailService.SendEmailAsync(user.Email, $"Thanks for making a pledge!", emailMessage,
+                                emailMessage);
+                        }
+                        catch { }
+                    });
+                    asyncTask.GetAwaiter().GetResult();
+                    Response.Redirect("MakePledgeSuccessful.aspx");
+                }
+                catch (Exception ex)
+                {
+                    alertDiv.Visible = true;
+                    errorMessageLabel.Text = ex.InnerException?.Message ?? ex.Message;
+                }
+                finally
+                {
+                    context.Dispose();
+                }
             }
         }
     }

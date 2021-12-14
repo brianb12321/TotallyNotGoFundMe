@@ -21,6 +21,7 @@ namespace TotallyNotGuFundMe.Data
         public IEnumerable<Pledge> GetUnfulfilledPledgesByUser(Event eventObj, string userId)
         {
             var unfulfilledPledges = eventObj.Pledges
+                .Where(p => p.UserId == userId)
                 .Where(p => p.Transactions.Sum(t => t.TransactionAmount) < p.PledgeAmount);
 
             return unfulfilledPledges;

@@ -40,6 +40,14 @@ namespace TotallyNotGuFundMe.Data
 
             return foundEvent.Pledges;
         }
+        public ICollection<Pledge> FinishEvent(int eventId)
+        {
+            Event foundEvent = GetEventById(eventId);
+            foundEvent.EventState = EventState.Finished;
+            _context.SaveChanges();
+
+            return foundEvent.Pledges;
+        }
 
         public IEnumerable<Pledge> GetPledgesOnUserAndEventId(int eventId, string userId, out Event associatedEvent)
         {

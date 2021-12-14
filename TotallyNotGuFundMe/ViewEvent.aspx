@@ -27,7 +27,7 @@
             <h1>
                 <asp:Label runat="server" ID="eventNameLabel"></asp:Label>
             </h1>
-            <div runat="server" id="alertDiv" class="alert alert-<%: AlertDivType %>" role="alert" visible="false">
+            <div runat="server" id="alertDiv" role="alert" visible="false">
                 <asp:Label runat="server" ID="alertMessageLabel"></asp:Label>
             </div>
             <div runat="server" ID="adminDiv" Visible="false">
@@ -39,6 +39,7 @@
                     <div class="dropdown-menu" aria-labelledby="administerEventButton">
                         <asp:LinkButton runat="server" ID="editLinkButton" CssClass="dropdown-item" OnClick="editLinkButton_Click">Edit</asp:LinkButton>
                         <asp:LinkButton runat="server" ID="beginEventLinkButton" Visible="false" CssClass="dropdown-item" OnClick="beginEventLinkButton_Click">Begin Event</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="finishEventLinkButton" Visible="false" CssClass="dropdown-item" OnClick="finishEventLinkButton_OnClick">Finish Event</asp:LinkButton>
                         <a class="dropdown-item" data-toggle="modal" data-target="#deleteModal">Delete Event</a>
                     </div>
                 </div>

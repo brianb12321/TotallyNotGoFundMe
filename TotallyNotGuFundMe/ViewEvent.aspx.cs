@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -29,7 +30,6 @@ namespace TotallyNotGuFundMe
             public EventState EventState { get; set; }
         }
         public int ProgressAmount = 0;
-        public string AlertDivType = "success";
         private int eventId;
 
         public IEventDataService EventDataService { get; set; }
@@ -77,10 +77,19 @@ namespace TotallyNotGuFundMe
             if((Context.User != null && Context.User.Identity.IsAuthenticated) && Context.User.Identity.GetUserId() == foundEvent.UserId)
             {
                 adminDiv.Visible = true;
-            }
-            if (foundEvent.EventState == EventState.Created)
-            {
-                beginEventLinkButton.Visible = true;
+                if (foundEvent.EventState == EventState.Created)
+                {
+                    beginEventLinkButton.Visible = true;
+                }
+
+                else if (foundEvent.EventState == EventState.InProgress)
+                {
+                    finishEventLinkButton.Visible = true;
+                }
+                else if (foundEvent.EventState == EventState.Finished)
+                {
+                    editLinkButton.Visible = false;
+                }
             }
             eventNameLabel.Text = foundEvent.Name;
             eventImage.ImageUrl = foundEvent.ImageUrl;
@@ -116,16 +125,19 @@ namespace TotallyNotGuFundMe
 From the Totally Not GoFundMe Team!
 </p>
 ";
-                    EmailService.SendEmailAsync(user.Email, $"Event {currentEvent.Name} Went Live!", message, message);
+                    Task.Run(async () => await EmailService.SendEmailAsync(user.Email, $"Event {currentEvent.Name} Went Live!", message, message))
+                        .GetAwaiter()
+                        .GetResult();
+
                     alertMessageLabel.Text = "Your event successfully went live!";
-                    AlertDivType = "success";
+                    alertDiv.Attributes.Add("class", "alert alert-success");
                     alertDiv.Visible = true;
                 }
             }
             catch (Exception ex)
             {
                 alertMessageLabel.Text = "An unexpected error occurred while processing your request. Please try again";
-                AlertDivType = "danger";
+                alertDiv.Attributes.Add("class", "alert alert-danger");
                 alertDiv.Visible = true;
             }
         }
@@ -144,6 +156,50 @@ From the Totally Not GoFundMe Team!
         {
             EventDataService.DeleteEventById(eventId);
             Response.Redirect("Events.aspx");
+        }
+
+        protected void finishEventLinkButton_OnClick(object sender, EventArgs e)
+        {
+            EventViewState currentEvent = (EventViewState)ViewState["currentEvent"];
+            try
+            {
+                var pledges = EventDataService.FinishEvent(currentEvent.EventId);
+
+                //Send Email
+                foreach (Pledge pledge in pledges.GroupBy(p => p.UserId).Select(p => p.First()))
+                {
+                    DonationUser user = pledge.User;
+                    Uri payPledgeUri = new Uri(Request.Url,
+                        $"/AuthPages/PayPledge.aspx?eventId={currentEvent.EventId}");
+                    string message = $@"
+<p>
+    Dear {user.UserName},<br/>
+</p>
+<p>
+    The event '{currentEvent.Name}' is now finished.
+</p>
+<p>
+    Please pay your pledge(s) <a href='{payPledgeUri}'>here</a>
+</p>
+<p>
+From the Totally Not GoFundMe Team!
+</p>
+";
+                    Task.Run(async () => await EmailService.SendEmailAsync(user.Email, $"Event {currentEvent.Name} Finished!", message, message))
+                        .GetAwaiter()
+                        .GetResult();
+
+                    alertMessageLabel.Text = "Your event is now finished. You will not be able to edit this event anymore.";
+                    alertDiv.Attributes.Add("class", "alert alert-success");
+                    alertDiv.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                alertMessageLabel.Text = "An unexpected error occurred while processing your request. Please try again";
+                alertDiv.Attributes.Add("class", "alert alert-danger");
+                alertDiv.Visible = true;
+            }
         }
     }
 }
