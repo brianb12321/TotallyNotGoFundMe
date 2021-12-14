@@ -14,13 +14,14 @@ namespace TotallyNotGuFundMe.Models
         public int PledgeId { get; set; }
         [Required, DataType(DataType.Currency), DisplayName("Pledge Amount")]
         public decimal PledgeAmount { get; set; }
-        [DataType(DataType.Currency), DisplayName("Amount Paid")]
-        public decimal AmountPaid { get; set; }
         [ForeignKey("UserId")]
         public DonationUser User { get; set; }
         public string UserId { get; set; }
         public int EventId { get; set; }
         [ForeignKey("EventId")]
         public Event Event { get; set; }
+
+        public virtual ICollection<PledgeTransaction> Transactions { get; set; }
+        public decimal AmountRemaining => Math.Max(PledgeAmount - Transactions.Sum(t => t.TransactionAmount), 0.00m);
     }
 }

@@ -8,10 +8,10 @@ namespace TotallyNotGuFundMe.Email
 {
     public static class EmailServiceFactory
     {
-        public static IEmailService UseSendGridFromConfig()
+        public static string GetSendGridApiKey()
         {
             string apiKey = WebConfigurationManager.AppSettings["SENDGRID_API_KEY"];
-            return new SendGridEmailService(apiKey);
+            return apiKey;
         }
     }
 }

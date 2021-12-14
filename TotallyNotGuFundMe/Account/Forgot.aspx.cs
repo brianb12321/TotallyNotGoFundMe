@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
+using TotallyNotGuFundMe.Email;
 using TotallyNotGuFundMe.Models;
 
 namespace TotallyNotGuFundMe.Account
 {
     public partial class ForgotPassword : Page
     {
+        public IEmailService EmailService { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
         }
@@ -31,7 +34,11 @@ namespace TotallyNotGuFundMe.Account
                 // Send email with the code and the redirect to reset password page
                 string code = manager.GeneratePasswordResetToken(user.Id);
                 string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
-                manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+                string emailBody = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.";
+                Task.Run(() => EmailService.SendEmailAsync(user.Email, "Reset Password", emailBody, emailBody).GetAwaiter().GetResult())
+                    .GetAwaiter()
+                    .GetResult();
+
                 loginForm.Visible = false;
                 DisplayEmail.Visible = true;
             }

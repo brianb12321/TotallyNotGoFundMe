@@ -9,6 +9,7 @@ namespace TotallyNotGuFundMe.Data
     {
         Event GetEventById(int id);
         void SaveEvent(Event eventObj);
-        void BeginEvent();
+        ICollection<Pledge> BeginEvent(int eventId);
+        IEnumerable<Pledge> GetPledgesOnUserAndEventId(int eventId, string userId, out Event associatedEvent);
     }
 }

@@ -14,6 +14,7 @@ namespace TotallyNotGuFundMe.Models
     {
         public DbSet<Event> Events { get; set; }
         public DbSet<Pledge> Pledges { get; set; }
+        public DbSet<PledgeTransaction> Transactions { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

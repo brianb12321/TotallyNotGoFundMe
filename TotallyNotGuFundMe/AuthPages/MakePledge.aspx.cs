@@ -12,6 +12,7 @@ namespace TotallyNotGuFundMe.AuthPages
     public partial class MakePledge : System.Web.UI.Page
     {
         private int eventId;
+        public IEmailService EmailService { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             string eventIdString = Request.QueryString["eventId"];
@@ -49,7 +50,6 @@ namespace TotallyNotGuFundMe.AuthPages
                 {
                     await context.SaveChangesAsync();
 
-                    IEmailService emailService = EmailServiceFactory.UseSendGridFromConfig();
                     DonationUser user = await Context.GetOwinContext().GetUserManager<ApplicationUserManager>()
                         .FindByIdAsync(loggedOnUserId);
 
@@ -71,7 +71,7 @@ namespace TotallyNotGuFundMe.AuthPages
     The Totally Not GoFundMe Team
 </p>
 ";
-                    await emailService.SendEmailAsync(user.Email, $"Thanks for making a pledge!", emailMessage,
+                    await EmailService.SendEmailAsync(user.Email, $"Thanks for making a pledge!", emailMessage,
                         emailMessage);
                 });
                 asyncTask.GetAwaiter().GetResult();

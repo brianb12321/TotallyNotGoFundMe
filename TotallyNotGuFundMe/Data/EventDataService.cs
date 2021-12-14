@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TotallyNotGuFundMe.Models;
@@ -18,6 +19,7 @@ namespace TotallyNotGuFundMe.Data
         {
             Event foundEvent = _context.Events
                 .Where(evt => evt.EventId == id)
+                .Include(evt => evt.User)
                 .Include(evt => evt.Pledges)
                 .First();
 
@@ -30,9 +32,20 @@ namespace TotallyNotGuFundMe.Data
             _context.SaveChanges();
         }
 
-        public void BeginEvent()
+        public ICollection<Pledge> BeginEvent(int eventId)
         {
-            throw new NotImplementedException();
+            Event foundEvent = GetEventById(eventId);
+            foundEvent.EventState = EventState.InProgress;
+            _context.SaveChanges();
+
+            return foundEvent.Pledges;
+        }
+
+        public IEnumerable<Pledge> GetPledgesOnUserAndEventId(int eventId, string userId, out Event associatedEvent)
+        {
+            Event foundEvent = GetEventById(eventId);
+            associatedEvent = foundEvent;
+            return foundEvent.Pledges.Where(p => p.UserId == userId);
         }
     }
 }

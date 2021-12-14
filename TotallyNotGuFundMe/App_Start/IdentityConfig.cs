@@ -15,14 +15,6 @@ using TotallyNotGuFundMe.Models;
 
 namespace TotallyNotGuFundMe
 {
-    public class EmailService : IIdentityMessageService
-    {
-        public async Task SendAsync(IdentityMessage message)
-        {
-            IEmailService emailService = EmailServiceFactory.UseSendGridFromConfig();
-            await emailService.SendEmailAsync(message.Destination, message.Subject, message.Body, message.Body);
-        }
-    }
 
     public class SmsService : IIdentityMessageService
     {
@@ -78,8 +70,6 @@ namespace TotallyNotGuFundMe
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

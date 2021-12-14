@@ -5,6 +5,9 @@
             <h1>
                 <asp:Label runat="server" ID="eventNameLabel"></asp:Label>
             </h1>
+            <div runat="server" id="alertDiv" class="alert alert-<%: AlertDivType %>" role="alert" visible="false">
+                <asp:Label runat="server" ID="alertMessageLabel"></asp:Label>
+            </div>
             <div runat="server" ID="adminDiv" Visible="false">
                 <% //https://getbootstrap.com/docs/4.0/components/dropdowns/ %>
                 <div class="dropdown">
@@ -13,7 +16,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="administerEventButton">
                         <asp:LinkButton runat="server" ID="editLinkButton" CssClass="dropdown-item">Edit</asp:LinkButton>
-                        <asp:LinkButton runat="server" ID="beginEventLinkButton" CssClass="dropdown-item" OnClick="beginEventLinkButton_Click">Begin Event</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="beginEventLinkButton" Visible="false" CssClass="dropdown-item" OnClick="beginEventLinkButton_Click">Begin Event</asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -31,6 +34,7 @@
                 <div class="progress-bar" style="width: <%: ProgressAmount %>%"role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="<%: ProgressAmount %>"><%: ProgressAmount %>%</div>
             </div>
             <asp:Button runat="server" ID="makePledgeButton" CssClass="btn btn-success btn-lg btn-block" Text="Make Pledge!" OnClick="makePledgeButton_Click"/>
+            <asp:Button runat="server" ID="payPledgeButton" Visible="false" CssClass="btn btn-primary btn-lg btn-block" Text="Pay Pledge!" OnClick="payPledgeButton_Click"/>
         </div>
     </div>
     <div class="row">

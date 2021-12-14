@@ -49,6 +49,15 @@
     <Reference Include="AspNet.ScriptManager.bootstrap, Version=4.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.bootstrap.4.5.3\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac, Version=6.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.3.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Web.6.0.0\lib\net472\Autofac.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SendGrid, Version=9.25.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\SendGrid.9.25.1\lib\net452\SendGrid.dll</HintPath>
@@ -56,13 +65,32 @@
     <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
       <HintPath>..\packages\starkbank-ecdsa.1.3.3\lib\net452\StarkbankEcdsa.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -176,6 +204,8 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="AuthPages\PayPledge.aspx" />
+    <Content Include="AuthPages\PayPledgeSuccessful.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -434,9 +464,24 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AuthPages\PayPledge.aspx.cs">
+      <DependentUpon>PayPledge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuthPages\PayPledge.aspx.designer.cs">
+      <DependentUpon>PayPledge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AuthPages\PayPledgeSuccessful.aspx.cs">
+      <DependentUpon>PayPledgeSuccessful.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuthPages\PayPledgeSuccessful.aspx.designer.cs">
+      <DependentUpon>PayPledgeSuccessful.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -446,6 +491,8 @@
     </Compile>
     <Compile Include="Data\EventDataService.cs" />
     <Compile Include="Data\IEventDataService.cs" />
+    <Compile Include="Data\ITransactionDataService.cs" />
+    <Compile Include="Data\TransactionDataService.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -455,6 +502,7 @@
     </Compile>
     <Compile Include="Email\EmailServiceFactory.cs" />
     <Compile Include="Email\IEmailService.cs" />
+    <Compile Include="Email\SendGridEmailService.cs" />
     <Compile Include="Events.aspx.cs">
       <DependentUpon>Events.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -499,11 +547,20 @@
     <Compile Include="Migrations\202112130313192_AddEventOwnerIdToEventModel.Designer.cs">
       <DependentUpon>202112130313192_AddEventOwnerIdToEventModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112140230037_AddedPledgeTransactionModel.cs" />
+    <Compile Include="Migrations\202112140230037_AddedPledgeTransactionModel.Designer.cs">
+      <DependentUpon>202112140230037_AddedPledgeTransactionModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112140409363_RemovedTotalAmountPaidFromPledgeModel.cs" />
+    <Compile Include="Migrations\202112140409363_RemovedTotalAmountPaidFromPledgeModel.Designer.cs">
+      <DependentUpon>202112140409363_RemovedTotalAmountPaidFromPledgeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DonationUser.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Pledge.cs" />
+    <Compile Include="Models\PledgeTransaction.cs" />
     <Compile Include="NewEvent.aspx.cs">
       <DependentUpon>NewEvent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -582,6 +639,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112130313192_AddEventOwnerIdToEventModel.resx">
       <DependentUpon>202112130313192_AddEventOwnerIdToEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112140230037_AddedPledgeTransactionModel.resx">
+      <DependentUpon>202112140230037_AddedPledgeTransactionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112140409363_RemovedTotalAmountPaidFromPledgeModel.resx">
+      <DependentUpon>202112140409363_RemovedTotalAmountPaidFromPledgeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

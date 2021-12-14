@@ -24,6 +24,24 @@ namespace TotallyNotGuFundMe
         protected global::System.Web.UI.WebControls.Label eventNameLabel;
 
         /// <summary>
+        /// alertDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertDiv;
+
+        /// <summary>
+        /// alertMessageLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label alertMessageLabel;
+
+        /// <summary>
         /// adminDiv control.
         /// </summary>
         /// <remarks>
@@ -76,6 +94,15 @@ namespace TotallyNotGuFundMe
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button makePledgeButton;
+
+        /// <summary>
+        /// payPledgeButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button payPledgeButton;
 
         /// <summary>
         /// descriptionLabel control.
