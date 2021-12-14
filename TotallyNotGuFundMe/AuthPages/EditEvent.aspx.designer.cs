@@ -11,7 +11,7 @@ namespace TotallyNotGuFundMe.AuthPages
 {
 
 
-    public partial class NewEvent
+    public partial class EditEvent
     {
 
         /// <summary>
@@ -22,6 +22,15 @@ namespace TotallyNotGuFundMe.AuthPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errorLabel;
+
+        /// <summary>
+        /// headerLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerLabel;
 
         /// <summary>
         /// nameTextBox control.
@@ -40,15 +49,6 @@ namespace TotallyNotGuFundMe.AuthPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox descriptionTextBox;
-
-        /// <summary>
-        /// expectedAmountTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox expectedAmountTextBox;
 
         /// <summary>
         /// imageUrlTextBox control.

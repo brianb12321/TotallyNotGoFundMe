@@ -84,7 +84,7 @@ namespace TotallyNotGuFundMe
             }
             eventNameLabel.Text = foundEvent.Name;
             eventImage.ImageUrl = foundEvent.ImageUrl;
-            ProgressAmount = (int)((foundEvent.AmountDonated / foundEvent.ExpectedAmount) * 100);
+            ProgressAmount = Math.Min((int)((foundEvent.AmountDonated / foundEvent.ExpectedAmount) * 100), 100);
             donationAmount.Text = $"{foundEvent.AmountDonated:C} / {foundEvent.ExpectedAmount:C}";
             descriptionLabel.Text = foundEvent.Description;
         }
@@ -133,6 +133,17 @@ From the Totally Not GoFundMe Team!
         protected void payPledgeButton_Click(object sender, EventArgs e)
         {
             Response.Redirect($"AuthPages/PayPledge.aspx?eventId={eventId}");
+        }
+
+        protected void editLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"AuthPages/EditEvent.aspx?eventId={eventId}");
+        }
+
+        protected void deleteEventButton_OnClick(object sender, EventArgs e)
+        {
+            EventDataService.DeleteEventById(eventId);
+            Response.Redirect("Events.aspx");
         }
     }
 }

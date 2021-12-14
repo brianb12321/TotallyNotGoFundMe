@@ -47,5 +47,18 @@ namespace TotallyNotGuFundMe.Data
             associatedEvent = foundEvent;
             return foundEvent.Pledges.Where(p => p.UserId == userId);
         }
+
+        public void DeleteEventById(int eventId)
+        {
+            Event foundEvent = _context.Events.Where(e => e.EventId == eventId).Include(e => e.Pledges).FirstOrDefault();
+            _context.Pledges.RemoveRange(foundEvent.Pledges);
+            _context.Events.Remove(foundEvent);
+            _context.SaveChanges();
+        }
+
+        public void Update()
+        {
+            _context.SaveChanges();
+        }
     }
 }

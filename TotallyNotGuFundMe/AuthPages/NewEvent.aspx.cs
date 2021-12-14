@@ -23,6 +23,7 @@ namespace TotallyNotGuFundMe.AuthPages
                     Name = nameTextBox.Text,
                     Description = descriptionTextBox.Text,
                     ImageUrl = imageUrlTextBox.Text,
+                    ExpectedAmount = decimal.Parse(expectedAmountTextBox.Text),
                     EventOwnerId = Context.User.Identity.GetUserId(),
                     EventState = EventState.Created
                 };
@@ -30,7 +31,7 @@ namespace TotallyNotGuFundMe.AuthPages
                 try
                 {
                     context.SaveChanges();
-                    Response.Redirect($"ViewEvent.aspx?eventId={newEvent.EventId}");
+                    Response.Redirect($"~/ViewEvent.aspx?eventId={newEvent.EventId}");
                 }
                 catch (Exception exception)
                 {

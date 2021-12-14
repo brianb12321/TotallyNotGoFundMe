@@ -198,6 +198,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\ResetPassword.aspx" />
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
+    <Content Include="AuthPages\EditEvent.aspx" />
     <Content Include="AuthPages\PayPledge.aspx" />
     <Content Include="AuthPages\PayPledgeSuccessful.aspx" />
     <Content Include="Contact.aspx" />
@@ -420,6 +421,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AuthPages\EditEvent.aspx.cs">
+      <DependentUpon>EditEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuthPages\EditEvent.aspx.designer.cs">
+      <DependentUpon>EditEvent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AuthPages\PayPledge.aspx.cs">
       <DependentUpon>PayPledge.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

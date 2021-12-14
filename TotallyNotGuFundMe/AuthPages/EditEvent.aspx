@@ -1,8 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NewEvent.aspx.cs" Inherits="TotallyNotGuFundMe.AuthPages.NewEvent" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditEvent.aspx.cs" Inherits="TotallyNotGuFundMe.AuthPages.EditEvent" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label runat="server" ID="errorLabel" Visible="False" CssClass="text-danger"></asp:Label>
-    <h1>Create a New Event</h1>
+    <h1 runat="server" id="headerLabel">Edit Event</h1>
     <div class="form-group">
         <asp:Label runat="server">Event Name</asp:Label>
         <asp:TextBox runat="server" ID="nameTextBox" CssClass="form-control"></asp:TextBox>
@@ -11,12 +10,7 @@
     <div class="form-group">
         <asp:label runat="server">Description</asp:label>
         <asp:TextBox runat="server" ID="descriptionTextBox" CssClass="form-control" TextMode="multiline"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="descriptionTextBox" CssClass="text-danger" ErrorMessage="Description is required"></asp:RequiredFieldValidator>
-    </div>
-    <div class="form-group">
-        <asp:label runat="server">Expected Amount</asp:label>
-        <asp:TextBox runat="server" ID="expectedAmountTextBox" CssClass="form-control" TextMode="number" min="1" max="100000"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="expectedAmountTextBox" CssClass="text-danger" ErrorMessage="You must specify pledge amount between $1 to $100,000"></asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="descriptionTextBox" CssClass="text-danger" ErrorMessage="Descripiton is required"></asp:RequiredFieldValidator>
     </div>
     <div class="form-group">
         <asp:label runat="server">Image URL</asp:label>
@@ -24,6 +18,6 @@
         <asp:RequiredFieldValidator runat="server" ControlToValidate="imageUrlTextBox" CssClass="text-danger" ErrorMessage="Image Url is required"></asp:RequiredFieldValidator>
     </div>
     <div class="form-group">
-        <asp:Button runat="server" class="btn btn-primary" ID="submitForm" Text="Create Event" OnClick="submitForm_Click" />
+        <asp:Button runat="server" class="btn btn-primary" ID="submitForm" Text="Edit Event" OnClick="submitForm_Click" />
     </div>
 </asp:Content>

@@ -1,5 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewEvent.aspx.cs" Inherits="TotallyNotGuFundMe.ViewEvent" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <!-- Modal -->
+    <!-- https://getbootstrap.com/docs/4.0/components/modal/ -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this event? All associated pledges will be deleted and any payment will be refunded.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <asp:Button runat="server" ID="deleteEventButton" CssClass="btn btn-danger" Text="Delete" onClick="deleteEventButton_OnClick"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <h1>
@@ -11,12 +33,13 @@
             <div runat="server" ID="adminDiv" Visible="false">
                 <% //https://getbootstrap.com/docs/4.0/components/dropdowns/ %>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="administerEventButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle mb-2" type="button" id="administerEventButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Administer Event
                     </button>
                     <div class="dropdown-menu" aria-labelledby="administerEventButton">
-                        <asp:LinkButton runat="server" ID="editLinkButton" CssClass="dropdown-item">Edit</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="editLinkButton" CssClass="dropdown-item" OnClick="editLinkButton_Click">Edit</asp:LinkButton>
                         <asp:LinkButton runat="server" ID="beginEventLinkButton" Visible="false" CssClass="dropdown-item" OnClick="beginEventLinkButton_Click">Begin Event</asp:LinkButton>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#deleteModal">Delete Event</a>
                     </div>
                 </div>
             </div>
@@ -42,5 +65,6 @@
             <h2>Description</h2>
             <asp:Label runat="server" ID="descriptionLabel"></asp:Label>
         </div>
+    </div>
     </div>
 </asp:Content>

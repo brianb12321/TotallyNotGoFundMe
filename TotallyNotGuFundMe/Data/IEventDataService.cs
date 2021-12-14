@@ -11,5 +11,7 @@ namespace TotallyNotGuFundMe.Data
         void SaveEvent(Event eventObj);
         ICollection<Pledge> BeginEvent(int eventId);
         IEnumerable<Pledge> GetPledgesOnUserAndEventId(int eventId, string userId, out Event associatedEvent);
+        void DeleteEventById(int eventId);
+        void Update();
     }
 }
