@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 using TotallyNotGuFundMe.Models;
 
-namespace TotallyNotGuFundMe
+namespace TotallyNotGuFundMe.AuthPages
 {
     public partial class NewEvent : System.Web.UI.Page
     {
@@ -27,6 +23,7 @@ namespace TotallyNotGuFundMe
                     Name = nameTextBox.Text,
                     Description = descriptionTextBox.Text,
                     ImageUrl = imageUrlTextBox.Text,
+                    EventOwnerId = Context.User.Identity.GetUserId(),
                     EventState = EventState.Created
                 };
                 context.Events.Add(newEvent);

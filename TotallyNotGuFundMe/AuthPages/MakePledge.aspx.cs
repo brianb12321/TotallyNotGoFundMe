@@ -63,7 +63,7 @@ namespace TotallyNotGuFundMe.AuthPages
 </p>
 <br/>
 <p>
-    Pledge Amount: {pledge.PledgeAmount}
+    Pledge Amount: ${pledge.PledgeAmount}
 </p>
 
 <p>

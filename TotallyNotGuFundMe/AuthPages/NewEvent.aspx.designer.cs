@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TotallyNotGuFundMe
+namespace TotallyNotGuFundMe.AuthPages
 {
 
 

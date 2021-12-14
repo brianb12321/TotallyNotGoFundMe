@@ -15,6 +15,8 @@
             <div class="form-group">
                 <asp:Label runat="server">Pledge Amount</asp:Label>
                 <asp:TextBox runat="server" ID="pledgeAmountTextBox" CssClass="form-control" TextMode="Number" min="0" step="0.01"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="pledgeAmountTextBox" CssClass="text-danger" ErrorMessage="You must specify a pledge amount"></asp:RequiredFieldValidator>
+                <asp:RangeValidator runat="server" Display="Dynamic" ControlToValidate="pledgeAmountTextBox" MinimumValue="1" MaximumValue="100000" CssClass="text-danger" ErrorMessage="Pledge amount must be between $1 to $100,000"></asp:RangeValidator>
             </div>
             <asp:Button runat="server" CssClass="btn btn-success" ID="makePledgeButton" Text="Make Pledge" OnClick="makePledgeButton_Click"/>
         </div>
