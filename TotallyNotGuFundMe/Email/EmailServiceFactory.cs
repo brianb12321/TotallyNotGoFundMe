@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Configuration;
 
 namespace TotallyNotGuFundMe.Email
 {
@@ -10,7 +9,10 @@ namespace TotallyNotGuFundMe.Email
     {
         public static string GetSendGridApiKey()
         {
-            string apiKey = WebConfigurationManager.AppSettings["SENDGRID_API_KEY"];
+            string apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+            if (apiKey == null)
+                throw new Exception("The API Key is not found in the environment SENDGRID_API_KEY");
+                
             return apiKey;
         }
     }
